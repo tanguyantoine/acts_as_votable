@@ -3,11 +3,11 @@ require 'spec_helper'
 
 describe ActsAsVotable::Votable do
   it "should not be votable" do
-    NotVotable.should_not be_votable
+    NotVotable.new.should_not respond_to(:votable?)
   end
 
   it "should be votable" do
-    Votable.should be_votable
+    Votable.new.should respond_to(:votable?)
   end
 
   it_behaves_like "a votable_model" do

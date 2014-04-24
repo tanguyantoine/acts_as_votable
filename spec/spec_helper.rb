@@ -145,6 +145,7 @@ end
 
 def clean_database
   models = [ActsAsVotable::Vote, Voter, NotVoter, Votable, NotVotable, VotableCache]
+  #Mongoid::Tasks::Database.create_indexes models
   models.each do |model|
     model.delete_all
   end

@@ -1,5 +1,6 @@
 require 'mongoid'
 require 'active_support/inflector'
+require 'active_support/concern'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
