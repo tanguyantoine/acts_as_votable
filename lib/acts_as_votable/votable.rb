@@ -33,6 +33,7 @@ module ActsAsVotable
       }
 
       base.class_eval do
+
         has_many :votes_for, :class_name => 'ActsAsVotable::Vote', :as => :votable, :dependent => :destroy do
           def voters
             includes(:voter).map(&:voter)
@@ -214,12 +215,7 @@ module ActsAsVotable
           )
         end
       end
-
-      if (::ActiveRecord::VERSION::MAJOR == 3) && (::ActiveRecord::VERSION::MINOR != 0)
-        self.update_attributes(updates, :without_protection => true) if updates.size > 0
-      else
-        self.update_attributes(updates) if updates.size > 0
-      end
+      self.update_attributes(updates) if updates.size > 0
 
     end
 

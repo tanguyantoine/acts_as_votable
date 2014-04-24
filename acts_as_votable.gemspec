@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "acts_as_votable/version"
 
 Gem::Specification.new do |s|
-  s.name        = "acts_as_votable"
+  s.name        = "acts_as_votable_mongoid"
   s.version     = ActsAsVotable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ryan"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Rails gem to allowing records to be votable}
   s.description = %q{Rails gem to allowing records to be votable}
 
-  s.rubyforge_project = "acts_as_votable"
+  s.rubyforge_project = "acts_as_votable_mongoid"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency "rspec"
-  s.add_development_dependency "sqlite3", '1.3.7'
+  s.add_development_dependency "mongoid"
 end

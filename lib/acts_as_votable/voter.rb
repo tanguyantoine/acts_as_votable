@@ -120,15 +120,15 @@ module ActsAsVotable
     end
 
     def get_voted klass, extra_conditions = {}
-      klass.joins(:votes_for).merge find_votes(extra_conditions)
+      klass find_votes(extra_conditions)
     end
 
     def get_up_voted klass
-      klass.joins(:votes_for).merge find_up_votes
+      klass find_up_votes
     end
 
     def get_down_voted klass
-      klass.joins(:votes_for).merge find_down_votes
+      klass find_down_votes
     end
   end
 end
