@@ -15,7 +15,7 @@ module ActsAsVotable
         args[:votable].vote_by args.merge({ voter: self})
       end
 
-      def vote_up_for model=nil, args={}
+      def vote_up_for model = nil, args={}
         vote votable: model, vote_scope: args[:vote_scope], vote: true
       end
 
@@ -84,7 +84,7 @@ module ActsAsVotable
 
       def find_voted_items extra_conditions = {}
         options = extra_conditions.merge voter_id: id, voter_type: self.class.name
-        include_objects.where(options).collect(&:votable)
+        include_objects.where(options)
       end
 
       def find_up_voted_items extra_conditions = {}
