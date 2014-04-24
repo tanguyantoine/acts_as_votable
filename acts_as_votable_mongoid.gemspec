@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ryan"]
   s.email       = ["ryanto"]
-  s.homepage    = "http://rubygems.org/gems/acts_as_votable"
+  s.homepage    = "http://rubygems.org/gems/acts_as_votable_mongoid"
   s.summary     = %q{Rails gem to allowing records to be votable}
   s.description = %q{Rails gem to allowing records to be votable}
 
