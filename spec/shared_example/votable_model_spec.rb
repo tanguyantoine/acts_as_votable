@@ -67,7 +67,7 @@ shared_examples "a votable_model" do
 
   it "should have been voted on by voter2" do
     votable.vote_by :voter => voter2, :vote => true
-    votable.find_votes_for.first.voter.id.should be voter2.id
+    expect(votable.find_votes_for.first.voter.id).to eq(voter2.id)
   end
 
   it "should count the vote as registered if this is the voters first vote" do
@@ -380,7 +380,7 @@ shared_examples "a votable_model" do
     end
 
     it "should not be able to vote on a parent non votable" do
-      StiNotVotable.should_not be_votable
+      StiNotVotable.new.should_not respond_to(:votable?)
     end
 
     it "should be able to vote on a child when its parent is votable" do

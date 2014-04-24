@@ -1,79 +1,79 @@
 shared_examples "a voter_model" do
   let (:votable_klass) { votable.class }
 
-  it "should be voted on after a voter has voted" do
+  it "should be_voted on after a voter has voted" do
     votable.vote_by :voter => voter
-    voter.voted_on?(votable).should be true
-    voter.voted_for?(votable).should be true
+    voter.voted_on?(votable).should be_true
+    voter.voted_for?(votable).should be_true
   end
 
   it "should not be voted on if a voter has not voted" do
-    voter.voted_on?(votable).should be false
+    voter.voted_on?(votable).should be_false
   end
 
-  it "should be voted on after a voter has voted under scope" do
+  it "should be_voted on after a voter has voted under scope" do
     votable.vote_by :voter => voter, :vote_scope => 'rank'
-    voter.voted_on?(votable, :vote_scope => 'rank').should be true
+    voter.voted_on?(votable, :vote_scope => 'rank').should be_true
   end
 
   it "should not be voted on other scope after a voter has voted under one scope" do
     votable.vote_by :voter => voter, :vote_scope => 'rank'
-    voter.voted_on?(votable).should be false
+    voter.voted_on?(votable).should be_false
   end
 
-  it "should be voted as true when a voter has voted true" do
+  it "should be_voted as true when a voter has voted true" do
     votable.vote_by :voter => voter
-    voter.voted_as_when_voted_on(votable).should be true
-    voter.voted_as_when_voted_for(votable).should be true
+    voter.voted_as_when_voted_on(votable).should be_true
+    voter.voted_as_when_voted_for(votable).should be_true
   end
 
-  it "should be voted as true when a voter has voted true under scope" do
+  it "should be_voted as true when a voter has voted true under scope" do
     votable.vote_by :voter => voter, :vote_scope => 'rank'
-    voter.voted_as_when_voted_for(votable, :vote_scope => 'rank').should be true
+    voter.voted_as_when_voted_for(votable, :vote_scope => 'rank').should be_true
   end
 
-  it "should be voted as false when a voter has voted false" do
+  it "should be_voted as false when a voter has voted false" do
     votable.vote_by :voter => voter, :vote => false
-    voter.voted_as_when_voted_for(votable).should be false
+    voter.voted_as_when_voted_for(votable).should be_false
   end
 
-  it "should be voted as false when a voter has voted false under scope" do
+  it "should be_voted as false when a voter has voted false under scope" do
     votable.vote_by :voter => voter, :vote => false, :vote_scope => 'rank'
-    voter.voted_as_when_voted_for(votable, :vote_scope => 'rank').should be false
+    voter.voted_as_when_voted_for(votable, :vote_scope => 'rank').should be_false
   end
 
-  it "should be voted as nil when a voter has never voted" do
-    voter.voted_as_when_voting_on(votable).should be nil
+  it "should be_voted as nil when a voter has never voted" do
+    voter.voted_as_when_voting_on(votable).should be_nil
   end
 
-  it "should be voted as nil when a voter has never voted under the scope" do
+  it "should be_voted as nil when a voter has never voted under the scope" do
     votable.vote_by :voter => voter, :vote => false, :vote_scope => 'rank'
-    voter.voted_as_when_voting_on(votable).should be nil
+    voter.voted_as_when_voting_on(votable).should be_nil
   end
 
   it "should return true if voter has voted true" do
     votable.vote_by :voter => voter
-    voter.voted_up_on?(votable).should be true
+    voter.voted_up_on?(votable).should be_true
   end
 
   it "should return false if voter has not voted true" do
     votable.vote_by :voter => voter, :vote => false
-    voter.voted_up_on?(votable).should be false
+    voter.voted_up_on?(votable).should be_false
   end
 
   it "should return true if the voter has voted false" do
     votable.vote_by :voter => voter, :vote => false
-    voter.voted_down_on?(votable).should be true
+    voter.voted_down_on?(votable).should be_true
   end
 
   it "should return false if the voter has not voted false" do
     votable.vote_by :voter => voter, :vote => true
-    voter.voted_down_on?(votable).should be false
+    voter.voted_down_on?(votable).should be_false
   end
 
   it "should provide reserve functionality, voter can vote on votable" do
     voter.vote :votable => votable, :vote => 'bad'
-    voter.voted_as_when_voting_on(votable).should be false
+    voter.voted_as_when_voting_on(votable).should be_false
   end
 
   it "should allow the voter to vote up a model" do
@@ -134,11 +134,11 @@ shared_examples "a voter_model" do
     voter.votes.down.for_type(votable_klass).count.should == 1
   end
 
-  it "should be contained to instances" do
+  it "should be_contained to instances" do
     voter.vote :votable => votable, :vote => false
     voter2.vote :votable => votable
 
-    voter.voted_as_when_voting_on(votable).should be false
+    voter.voted_as_when_voting_on(votable).should be_false
   end
 
   describe '#find_voted_items' do
@@ -234,8 +234,8 @@ shared_examples "a voter_model" do
     it 'returns objects of a class that a voter has voted for' do
       votable.vote_by :voter => voter
       votable2.vote_down voter
-      subject.should include votable
-      subject.should include votable2
+      subject.to_a.should include( votable )
+      subject.to_a.should include( votable2 )
       subject.size.should == 2
     end
 
@@ -251,7 +251,7 @@ shared_examples "a voter_model" do
 
     it 'returns up voted items that a voter has voted for' do
       votable.vote_by :voter => voter
-      subject.should include votable
+      subject.to_a.should include( votable )
       subject.size.should == 1
     end
 
@@ -271,7 +271,7 @@ shared_examples "a voter_model" do
 
     it 'returns down voted items a voter has voted for' do
       votable.vote_down voter
-      subject.should include votable
+      subject.to_a.should include( votable )
       subject.size.should == 1
     end
   end

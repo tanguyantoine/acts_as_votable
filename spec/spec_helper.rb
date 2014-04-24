@@ -132,6 +132,11 @@ end
 class VotableCache
   include Mongoid::Document
   include ActsAsVotable::Votable
+  field :cached_scoped_test_votes_total, type: Integer
+  field :cached_scoped_test_votes_score, type: Integer
+  field :cached_scoped_test_votes_up, type: Integer
+  field :cached_scoped_test_votes_down, type: Integer
+  field :cached_scoped_weighted_score, type: Integer
   field :name
   validates_presence_of :name
 end

@@ -6,6 +6,19 @@ module ActsAsVotable
 
     included do
       include Helpers::Words
+      #Cache
+
+      field :cached_votes_total, type: Integer, default: 0
+      field :cached_votes_score, type: Integer, default: 0
+      field :cached_votes_up, type: Integer, default: 0
+      field :cached_votes_down, type: Integer, default: 0
+      field :cached_weighted_score, type: Integer, default: 0
+
+      index({ cached_votes_total: 1 })
+      index({ cached_votes_score: 1 })
+      index({ cached_votes_up: 1 })
+      index({ cached_votes_down: 1 })
+      index({ cached_weighted_score: 1 })
 
       # allow the user to define these himself
       has_many :votes_for, :class_name => 'ActsAsVotable::Vote', :as => :votable, :dependent => :destroy do
@@ -243,7 +256,7 @@ module ActsAsVotable
       aliases = {
 
         :vote_up => [
-          :up_by, :upvote_by, :like_by, :liked_by, 
+          :up_by, :upvote_by, :like_by, :liked_by,
           :up_from, :upvote_from, :upvote_by, :like_from, :liked_from, :vote_from
         ],
 

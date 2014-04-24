@@ -20,20 +20,6 @@ module ActsAsVotable
     index({ voter_id: 1, voter_type: 1 })
     index({ voter_id: 1, voter_type: 1, vote_scope: 1 })
     index({ votable_id: 1, votable_type: 1, vote_scope: 1 })
-    if true
-      field :cached_votes_total, type: Integer, default: 0
-      field :cached_votes_score, type: Integer, default: 0
-      field :cached_votes_up, type: Integer, default: 0
-      field :cached_votes_down, type: Integer, default: 0
-      field :cached_weighted_score, type: Integer, default: 0
-
-      index({ cached_votes_total: 1 })
-      index({ cached_votes_score: 1 })
-      index({ cached_votes_up: 1 })
-      index({ cached_votes_down: 1 })
-      index({ cached_weighted_score: 1 })
-
-    end
 
     belongs_to :votable, :polymorphic => true
     belongs_to :voter, :polymorphic => true
